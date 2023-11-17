@@ -1,0 +1,8 @@
+input/
+output/
+venv/
+__pycache__/
+.vscode/
+.env
+.DS_Store
+keys.py
