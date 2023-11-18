@@ -11,28 +11,13 @@ from broker_and_barter import broker_and_barter
 input_folder = './input/'
 
 # TO USE WITH A FILE MANUALLY ADDED TO INPUT FOLDER:
-# files = os.listdir(input_folder)
-# try:
-#     for file in files:
-#         if file.endswith('.pdf'):
-#             original_path = os.path.join(input_folder, file)
-#             new_path = os.path.join(input_folder, "data.pdf")
-#             shutil.copy(original_path, new_path)
-# except Exception as e:
-#     print(e)
-
-# TO USE WITH A RIGHT CLICKED FILE WITH AN AUTOMATOR QUICK ACTION:
-if len(sys.argv) < 2:
-    print('No file selected')
-    sys.exit(1)
-
-file_path = sys.argv[1]
+files = os.listdir(input_folder)
 try:
-    if file_path.endswith('.pdf'):
-        new_path = os.path.join(input_folder, "data.pdf")
-        shutil.copy(file_path, new_path)
-    else:
-        print("The provided file is not a pdf")
+    for file in files:
+        if file.endswith('.pdf'):
+            original_path = os.path.join(input_folder, file)
+            new_path = os.path.join(input_folder, "data.pdf")
+            shutil.copy(original_path, new_path)
 except Exception as e:
     print(e)
     

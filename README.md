@@ -24,6 +24,15 @@ This tool complements a tax calculator spreadsheet.
 1. `source venv/bin/activate` to activate virtual env.
 2. `pip3 install -r requirements.txt` to install dependencies.
 3. in main directory, create two folders: `./input` and `./output`.
-4. drag a 1099 file into `./input` folder.
-6. `python3 app.py` to run the program.
+4. drag a 1099 pdf file into `./input` folder.
+6. `python3 local.py` to run the program.
 7. Find result files in `./output` folder.
+
+## Use as a Quick Action for Mac
+
+To be able to right click on a 1099 file anywhere in your mac and see a quick action to run this program follow these steps:
+- Create an Automator quick action (find instructions and the bash script in `./automator.sh`).
+- Add quick action to your mac's Finder. 
+- Right click on any file in your mac, the quick action should be displayed with the name you created.
+
+
