@@ -7,6 +7,8 @@
 
 # Usage
 
+
+
 # On mac, open Automator.app. -> Quick Action -> 
 # Set On top right: "Workflow receives current" 
 # set to "files or folders", "in" "Finder". Then drag the action "Run Shell script". Inside
@@ -17,6 +19,6 @@
 #!/bin/bash
 for f in "$@"
 do
-	cd ~/projects/fixie_2/
+	cd ~/projects/fixie/
 	./driver.sh $f
 done

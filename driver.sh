@@ -28,6 +28,7 @@ source venv/bin/activate
 
 python3 app.py "$FILE_PATH"
 
+# if app.py script fails will exit with a non-zero status
 STATUS=$?
 
 deactivate
