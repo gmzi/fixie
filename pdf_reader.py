@@ -184,17 +184,6 @@ def dividends(source):
                                       == 'Tax-exempt dividend', 'amount'].sum()
             symbol = group_df.iloc[0]['symbol']
 
-            # return pd.Series({
-            #     'symbol': symbol,
-            #     'nonqualified dividends': '{:,.2f}'.format(nonqualified_sum),
-            #     'qualified dividends': '{:,.2f}'.format(qualified_sum),
-            #     'short term capital gains': '{:,.2f}'.format(short_term),
-            #     'long term capital gains': '{:,.2f}'.format(long_term),
-            #     'section 199A dividends': '{:,.2f}'.format(section_A),
-            #     'foreign taxes paid': '{:,.2f}'.format(foreign_tax),
-            #     'tax exempt income': '{:,.2f}'.format(exempt_tax)
-            # })
-
             return pd.Series({
                 'symbol': symbol,
                 'nonqualified dividends': nonqualified_sum,
@@ -209,11 +198,6 @@ def dividends(source):
         # group results, clean index
         grouped_df = df.groupby(group_id).apply(
             sum_by_transaction_type).reset_index(drop=True)
-
-        # add a row at the bottom with the total value of each column
-        # total_row = grouped_df.select_dtypes(include=['float64']).sum()
-        # total_row['symbol'] = '** totals **'
-        # grouped_df = grouped_df._append(total_row, ignore_index=True)
 
         # Calculate the total value of each column of type 'float64'
         total_row = grouped_df.select_dtypes(include=['float64']).sum().to_frame().T

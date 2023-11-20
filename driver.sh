@@ -1,4 +1,4 @@
-# This driver grabs the file path from Automator and passes it to fixie.
+# This driver grabs the file path from Automator and passes it to Fixie.
 
 #!/bin/bash
 
@@ -15,7 +15,7 @@ fi
 # end tell
 # EOD
 
-# launch fixie:
+# Display dialog before launching fixie:
 osascript <<EOD
 tell application "System Events"
     display dialog "Fixie is working..." giving up after 1
