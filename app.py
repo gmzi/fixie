@@ -27,6 +27,8 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 file_path = sys.argv[1]
+file_name = os.path.basename(file_path)
+
 try:
     if file_path.endswith('.pdf'):
         new_path = os.path.join(input_folder, "data.pdf")
@@ -51,13 +53,13 @@ broker_table = broker_and_barter('./input/summary.pdf')
 summary_table = extractSummary('./input/summary.pdf')
 
 # Export each table as a different .csv 
-income_table.to_csv('./output/income.csv')
-broker_table.to_csv('./output/broker_transactions.csv')
-summary_table.to_csv('./output/summary.csv')
+income_table.to_csv(f'./output/income_{file_name}.csv')
+broker_table.to_csv(f'./output/broker_transactions_{file_name}.csv')
+summary_table.to_csv(f'./output/summary_{file_name}.csv')
 
 
 # Export each table as a worksheet in a single combined .xmls
-with pd.ExcelWriter('./output/result.xlsx', engine='xlsxwriter') as writer:
+with pd.ExcelWriter(f'./output/result_{file_name}.xlsx', engine='xlsxwriter') as writer:
     income_table.to_excel(writer, sheet_name='Income', index=False)
     broker_table.to_excel(writer, sheet_name='Broker Transactions', index=False)
     summary_table.to_excel(writer, sheet_name='Summary', index=False)
@@ -72,9 +74,6 @@ for file_name in files_to_clean:
         os.remove(file_path)
     else:
         print(f"File not found: {file_path}")
-
-
-print('done')
 
 # folder_path = "./output"
 # subprocess.call(["open", folder_path])
