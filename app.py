@@ -2,26 +2,12 @@ import os
 import shutil
 import sys
 import pandas as pd
-from cropFile import cropFile
-from summary import extractSummary
-from dividends_parser import dividends_parser
-from broker_and_barter import broker_and_barter
+from pdf_reader import cropFile, summary, broker, dividends
 
 
 input_folder = './input/'
 
-# TO USE WITH A FILE MANUALLY ADDED TO INPUT FOLDER:
-# files = os.listdir(input_folder)
-# try:
-#     for file in files:
-#         if file.endswith('.pdf'):
-#             original_path = os.path.join(input_folder, file)
-#             new_path = os.path.join(input_folder, "data.pdf")
-#             shutil.copy(original_path, new_path)
-# except Exception as e:
-#     print(e)
-
-# TO USE WITH A RIGHT CLICKED FILE WITH AN AUTOMATOR QUICK ACTION:
+# GRAB A RIGHT-CLICKED FILE FROM AN AUTOMATOR QUICK ACTION:
 if len(sys.argv) < 2:
     print('No file selected')
     sys.exit(1)
@@ -48,9 +34,9 @@ income_pdf = cropFile("./input/data.pdf",
                        './input/income.pdf')
 
 # create Pandas tables from pdf sections
-income_table = dividends_parser('./input/income.pdf')
-broker_table = broker_and_barter('./input/summary.pdf')
-summary_table = extractSummary('./input/summary.pdf')
+summary_table = summary('./input/summary.pdf')
+broker_table = broker('./input/summary.pdf')
+income_table = dividends('./input/income.pdf')
 
 # Export each table as a different .csv 
 income_table.to_csv(f'./output/income_{file_name}.csv')
@@ -74,7 +60,4 @@ for file_name in files_to_clean:
         os.remove(file_path)
     else:
         print(f"File not found: {file_path}")
-
-# folder_path = "./output"
-# subprocess.call(["open", folder_path])
 

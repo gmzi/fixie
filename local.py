@@ -2,15 +2,12 @@ import os
 import shutil
 import sys
 import pandas as pd
-from cropFile import cropFile
-from summary import extractSummary
-from dividends_parser import dividends_parser
-from broker_and_barter import broker_and_barter
+from pdf_reader import cropFile, summary, broker, dividends
 
 
 input_folder = './input/'
 
-# TO USE WITH A FILE MANUALLY ADDED TO INPUT FOLDER:
+# GRAB A FILE MANUALLY ADDED TO INPUT FOLDER:
 files = os.listdir(input_folder)
 try:
     for file in files:
@@ -31,9 +28,9 @@ income_pdf = cropFile("./input/data.pdf",
                        './input/income.pdf')
 
 # create Pandas tables from pdf sections
-income_table = dividends_parser('./input/income.pdf')
-broker_table = broker_and_barter('./input/summary.pdf')
-summary_table = extractSummary('./input/summary.pdf')
+income_table = dividends('./input/income.pdf')
+broker_table = broker('./input/summary.pdf')
+summary_table = summary('./input/summary.pdf')
 
 # Export each table as a different .csv 
 income_table.to_csv('./output/income.csv')
@@ -60,7 +57,4 @@ for file_name in files_to_clean:
 
 
 print('done')
-
-# folder_path = "./output"
-# subprocess.call(["open", folder_path])
 

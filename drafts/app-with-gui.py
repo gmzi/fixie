@@ -5,10 +5,7 @@ import os
 import shutil
 import sys
 import pandas as pd
-from cropFile import cropFile
-from summary import extractSummary
-from dividends_parser import dividends_parser
-from broker_and_barter import broker_and_barter
+from pdf_reader import cropFile, summary, dividends, broker
 import tkinter as tk
 import tkinter.ttk as ttk
 
@@ -55,9 +52,9 @@ def process_files():
                                './input/income.pdf')
 
         # create Pandas tables from pdf sections
-        income_table = dividends_parser('./input/income.pdf')
-        broker_table = broker_and_barter('./input/summary.pdf')
-        summary_table = extractSummary('./input/summary.pdf')
+        income_table = dividends('./input/income.pdf')
+        broker_table = broker('./input/summary.pdf')
+        summary_table = summary('./input/summary.pdf')
 
         # Export each table as a different .csv 
         income_table.to_csv('./output/income.csv')
