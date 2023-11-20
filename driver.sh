@@ -28,6 +28,13 @@ source venv/bin/activate
 
 python3 app.py "$FILE_PATH"
 
+STATUS=$?
+
 deactivate
+
+if [ $STATUS -ne 0 ]; then
+    osascript -e 'tell app "System Events" to display dialog "Fixie quit with status 1. Check your .pdf please"'
+    exit 1
+fi
 
 open './output'
