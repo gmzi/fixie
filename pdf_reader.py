@@ -179,7 +179,7 @@ def dividends(source):
             section_A = group_df.loc[group_df['transaction']
                                      == 'Section 199A dividend', 'amount'].sum()
             foreign_tax = group_df.loc[group_df['transaction']
-                                       == 'Foreign tax withheld', 'amount'].sum()
+                                       == 'Foreign tax withheld-Various', 'amount'].sum()
             exempt_tax = group_df.loc[group_df['transaction']
                                       == 'Tax-exempt dividend', 'amount'].sum()
             symbol = group_df.iloc[0]['symbol']
@@ -198,6 +198,8 @@ def dividends(source):
         # group results, clean index
         grouped_df = df.groupby(group_id).apply(
             sum_by_transaction_type).reset_index(drop=True)
+        
+        print(grouped_df)
 
         # Calculate the total value of each column of type 'float64'
         total_row = grouped_df.select_dtypes(include=['float64']).sum().to_frame().T
