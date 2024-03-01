@@ -38,18 +38,18 @@ def main():
         if not income_pdf:
             print("Crop failed at dividends section")
             sys.exit(1)
-        if not interest_pdf:
-            print("Crop failed at Interest section")
-            sys.exit(1)
         
         summary_table = summary('./input/summary.pdf', '2023')
         broker_table = broker('./input/summary.pdf')
         income_table = dividends('./input/income.pdf')
-        interest_table = interest('./input/interest.pdf')
+        
+        if interest_pdf:
+            interest_table = interest('./input/interest.pdf')
+            interest_table.to_csv(f'./output/interest_{file_name}.csv')
 
         income_table.to_csv(f'./output/income_{file_name}.csv')
         broker_table.to_csv(f'./output/broker_transactions_{file_name}.csv')
-        interest_table.to_csv(f'./output/interest_{file_name}.csv')
+        
         # summary_table.to_csv(f'./output/summary_{file_name}.csv')
 
         # with pd.ExcelWriter(f'./output/result_{file_name}.xlsx', engine='xlsxwriter') as writer:

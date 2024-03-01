@@ -85,9 +85,12 @@ def interest(source):
         
         last_total_interest_row = total_interest_row.iloc[-1]
         
-        df = pd.DataFrame(last_total_interest_row)
-        return df
-        
+        if not last_total_interest_row.empty:
+            df = pd.DataFrame(last_total_interest_row)
+            return df
+        else:
+            emptyDF = pd.DataFrame({'Total Interest': "empty"})
+            return emptyDF
     except FileNotFoundError:
         print(f"Error: the file {source} was not found")
         return None
