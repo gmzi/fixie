@@ -28,6 +28,9 @@ def main():
         income_pdf = cropFile("./input/data.pdf", 
                        'Detail for Dividends and Distributions', 
                        './input/income.pdf')
+        interest_pdf = cropFile('./input/data.pdf',
+                        'Interest Income',
+                        './input/interest.pdf')
         
         if not summary_pdf:
             print("Crop failed at summary section")
@@ -36,7 +39,7 @@ def main():
             print("Crop failed at dividends section")
             sys.exit(1)
         
-        summary_table = summary('./input/summary.pdf')
+        summary_table = summary('./input/summary.pdf', '2023')
         broker_table = broker('./input/summary.pdf')
         income_table = dividends('./input/income.pdf')
 

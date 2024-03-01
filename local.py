@@ -35,7 +35,7 @@ def main():
             print("Crop failed at dividends section")
             sys.exit(1)
         
-        summary_table = summary('./input/summary.pdf')
+        summary_table = summary('./input/summary.pdf', '2023')
         broker_table = broker('./input/summary.pdf')
         income_table = dividends('./input/income.pdf')
 

@@ -26,6 +26,7 @@ The script takes a PDF file, extracts specific sections into `./input`, then pro
 2. Install dependencies: `pip3 install -r requirements.txt`. 
 3. Create two empty folders in the main directory: `./input` and `./output`.
 4. Place a 1099 file (in .pdf format) into the `./input` folder.
+5. Go to `app.py` and change this line: `summary_table = summary('./input/summary.pdf', '2023')` for your desired year instead of "2023". Do the same in `local.py`. (Promise to fix this some day). 
 5. Run the program: `python3 local.py`.
 6. Find the result files in the `./output` folder.
 

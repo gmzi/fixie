@@ -30,7 +30,7 @@ def cropFile(source, key_phrase, output):
         return False
 
 
-def summary(source):
+def summary(source, year):
     try:
         # Read pdf and extract table data:
         data = tb.read_pdf(source, pages='all', 
@@ -46,7 +46,7 @@ def summary(source):
 
         # Clean extracted data:
         df = pd.DataFrame(narrow_data)
-        start_row = df[df['description'] == "DIVIDENDS AND DISTRIBUTIONS 2022 1099-DIV"].index.to_list()[0]
+        start_row = df[df['description'] == f"DIVIDENDS AND DISTRIBUTIONS {year} 1099-DIV"].index.to_list()[0]
         end_row = df[df['description'] == "SUMMARY OF PROCEEDS, GAINS & LOSSES, ADJ"].index.to_list()[0]
         df = df.iloc[start_row+1:end_row]
 
