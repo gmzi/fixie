@@ -2,7 +2,7 @@ import os
 import shutil
 import sys
 import pandas as pd
-from pdf_reader import cropFile, summary, broker, dividends
+from pdf_reader import cropFile, summary, broker, dividends, interest
 
 def main():
     input_folder = './input/'
@@ -38,26 +38,31 @@ def main():
         if not income_pdf:
             print("Crop failed at dividends section")
             sys.exit(1)
+        if not interest_pdf:
+            print("Crop failed at Interest section")
+            sys.exit(1)
         
         summary_table = summary('./input/summary.pdf', '2023')
         broker_table = broker('./input/summary.pdf')
         income_table = dividends('./input/income.pdf')
+        interest_table = interest('./input/interest.pdf')
 
         income_table.to_csv(f'./output/income_{file_name}.csv')
         broker_table.to_csv(f'./output/broker_transactions_{file_name}.csv')
-        summary_table.to_csv(f'./output/summary_{file_name}.csv')
+        interest_table.to_csv(f'./output/interest_{file_name}.csv')
+        # summary_table.to_csv(f'./output/summary_{file_name}.csv')
 
-        with pd.ExcelWriter(f'./output/result_{file_name}.xlsx', engine='xlsxwriter') as writer:
-            income_table.to_excel(writer, sheet_name='Income', index=False)
-            broker_table.to_excel(writer, sheet_name='Broker Transactions', index=False)
-            summary_table.to_excel(writer, sheet_name='Summary', index=False)
+        # with pd.ExcelWriter(f'./output/result_{file_name}.xlsx', engine='xlsxwriter') as writer:
+        #     income_table.to_excel(writer, sheet_name='Income', index=False)
+        #     broker_table.to_excel(writer, sheet_name='Broker Transactions', index=False)
+        #     summary_table.to_excel(writer, sheet_name='Summary', index=False)
 
     except Exception as e:
         print(e)
         sys.exit(1)
     
     folder_to_clean = "./input/"
-    files_to_clean = ["data.pdf", "income.pdf", "summary.pdf"]
+    files_to_clean = ["data.pdf", "income.pdf", "summary.pdf", "interest.pdf"]
     for file_name in files_to_clean:
         file_path = os.path.join(folder_to_clean, file_name)
         if os.path.exists(file_path):

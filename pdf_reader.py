@@ -67,6 +67,33 @@ def summary(source, year):
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
+
+def interest(source):
+    try:
+        # Read pdf and extract table data
+        data = tb.read_pdf(source, pages='all', 
+                           area=(82, 20, 751, 850),
+                        #    columns=[200, 300, 350, 480], 
+                           pandas_options={'header': None}, 
+                           stream=True,
+                           output_format='dataframe')
+
+        df = data[0]
+        
+        # Find the row with 'Total Interest'
+        total_interest_row = df[df.apply(lambda row: row.astype(str).str.contains('Total Interest').any(), axis=1)]
+        
+        last_total_interest_row = total_interest_row.iloc[-1]
+        
+        df = pd.DataFrame(last_total_interest_row)
+        return df
+        
+    except FileNotFoundError:
+        print(f"Error: the file {source} was not found")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
     
 def broker(source):
     try:
@@ -108,8 +135,12 @@ def broker(source):
 
 def dividends(source):
     try: 
-        data = tb.read_pdf(source, pages='all', area=(82, 20, 751, 600),
-                           columns=[200, 250, 290, 400, 480], pandas_options={'header': None}, stream=True, output_format='dataframe')
+        data = tb.read_pdf(source, pages='all', 
+                           area=(82, 20, 751, 600),
+                           columns=[200, 250, 290, 400, 480], 
+                           pandas_options={'header': None}, 
+                           stream=True, 
+                           output_format='dataframe')
         
         df = data[0]
 
@@ -198,8 +229,6 @@ def dividends(source):
         # group results, clean index
         grouped_df = df.groupby(group_id).apply(
             sum_by_transaction_type).reset_index(drop=True)
-        
-        print(grouped_df)
 
         # Calculate the total value of each column of type 'float64'
         total_row = grouped_df.select_dtypes(include=['float64']).sum().to_frame().T
