@@ -40,4 +40,10 @@ To use this program as a Quick Action on a Mac:
 ## Contribute
 Please feel free to clone, fork, or contribute in any way you find interesting.
 
+## Related
 
+Resources and related topics worth to investigate IMO:
+- This [blogpost](https://simonwillison.net/2024/Mar/30/ocr-pdfs-images/?utm_source=tldrwebdev) with links to these cool tools: 
+    - [ocr](https://tools.simonwillison.net/ocr)
+    - [tesseract](https://github.com/tesseract-ocr/tesseract)
+    - [PDF.js](https://mozilla.github.io/pdf.js/)
