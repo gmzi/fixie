@@ -1,3 +1,6 @@
+# DEPRECATION NOTE
+This program has been deprecated in favor of Fixie3, the main improvement being that Fixie3 doesn't require Java as a dependency and runs fully native Python. Find it at projects/fixie3. 
+
 # FIXIE - 1099 Data Extraction
 
 This script processes a 1099 form in .pdf format, extracting data from the 1099-DIV and 1099-B sections on the _Summary Information_ page. It also extracts data from the _Detail for Dividends and Distributions_ pages, grouping and summing by ticker symbol. The output is a set of .csv files:
