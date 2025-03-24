@@ -1,5 +1,5 @@
 # DEPRECATION NOTE
-This program has been deprecated in favor of Fixie3, the main improvement being that Fixie3 doesn't require Java as a dependency and runs fully native Python. Find it at [here](https://github.com/gmzi/fixie3). 
+This program has been deprecated in favor of Fixie3, the main improvement being that Fixie3 doesn't require Java as a dependency and runs fully native Python. Find it [here](https://github.com/gmzi/fixie3). 
 
 # FIXIE - 1099 Data Extraction
 
